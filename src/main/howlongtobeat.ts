@@ -22,10 +22,11 @@ export class HowLongToBeatService {
     return entry;
   }
 
-  async search(query: string, signal?: AbortSignal): Promise<Array<HowLongToBeatEntry>> {
+  async search(query: string, platform?: string, signal?: AbortSignal): Promise<Array<HowLongToBeatEntry>> {
     let searchTerms = query.split(' ');
     let search = await this.hltb.search(
       searchTerms,
+      platform,
       signal
     );
     // console.log(`Found ${search.count} results`);

@@ -5,7 +5,7 @@ async function testHowLongToBeatService() {
 
     try {
         // Example: Call the search method
-        const searchResults = await hltbService.search("resident evil 4");
+        const searchResults = await hltbService.search("resident evil", "Mobile");
         console.log("Search Results:", searchResults);
 
         // Example: Call the detail method

@@ -14,7 +14,7 @@ function testHowLongToBeatService() {
         const hltbService = new howlongtobeat_1.HowLongToBeatService();
         try {
             // Example: Call the search method
-            const searchResults = yield hltbService.search("resident evil 4");
+            const searchResults = yield hltbService.search("resident evil", "Mobile");
             console.log("Search Results:", searchResults);
             // Example: Call the detail method
             const gameId = "108881"; // Replace with an actual game ID

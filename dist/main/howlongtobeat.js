@@ -27,10 +27,10 @@ class HowLongToBeatService {
             return entry;
         });
     }
-    search(query, signal) {
+    search(query, platform, signal) {
         return __awaiter(this, void 0, void 0, function* () {
             let searchTerms = query.split(' ');
-            let search = yield this.hltb.search(searchTerms, signal);
+            let search = yield this.hltb.search(searchTerms, platform, signal);
             // console.log(`Found ${search.count} results`);
             let hltbEntries = new Array();
             for (const resultEntry of search.data) {

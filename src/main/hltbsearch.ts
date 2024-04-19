@@ -68,10 +68,11 @@ export class HltbSearch {
     }
   }
 
-  async search(query: Array<string>, signal?: AbortSignal): Promise<any> {
+  async search(query: Array<string>, platform?: string, signal?: AbortSignal): Promise<any> {
     // Use built-in javascript URLSearchParams as a drop-in replacement to create axios.post required data param
     let search = { ...this.payload };
     search.searchTerms = query;
+    if (platform) search.searchOptions.games.platform = platform;
     try {
       let result =
         await axios.post(HltbSearch.SEARCH_URL, search, {

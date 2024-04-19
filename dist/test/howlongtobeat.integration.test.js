@@ -59,7 +59,7 @@ describe('Integration-Testing HowLongToBeatService', () => {
         it('should abort searching for dark souls III', () => {
             const abortController = new AbortController();
             abortController.abort();
-            return new howlongtobeat_1.HowLongToBeatService().search('dark souls III', abortController.signal).then(() => {
+            return new howlongtobeat_1.HowLongToBeatService().search('dark souls III', undefined, abortController.signal).then(() => {
                 assert.fail();
             }).catch(e => {
                 assert.include(e.message.toLowerCase(), 'cancel');

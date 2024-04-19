@@ -7,7 +7,7 @@ export declare class HowLongToBeatService {
      * @return Promise<HowLongToBeatEntry> the promise that, when fullfilled, returns the game
      */
     detail(gameId: string, signal?: AbortSignal): Promise<HowLongToBeatEntry>;
-    search(query: string, signal?: AbortSignal): Promise<Array<HowLongToBeatEntry>>;
+    search(query: string, platform?: string, signal?: AbortSignal): Promise<Array<HowLongToBeatEntry>>;
     /**
      * Calculates the similarty of two strings based on the levenshtein distance in relation to the string lengths.
      * It is used to see how similar the search term is to the game name. This, of course has only relevance if the search term is really specific and matches the game name as good as possible.
