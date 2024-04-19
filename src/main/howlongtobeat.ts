@@ -42,6 +42,7 @@ export class HowLongToBeatService {
         Math.round(resultEntry.comp_plus / 3600),
         Math.round(resultEntry.comp_100 / 3600),
         HowLongToBeatService.calcDistancePercentage(resultEntry.game_name, query),
+        resultEntry.release_world,
         query
       ));
     }
@@ -93,7 +94,8 @@ export class HowLongToBeatEntry {
     public readonly gameplayMainExtra: number,
     public readonly gameplayCompletionist: number,
     public readonly similarity: number,
-    public readonly searchTerm: string
+    public readonly releaseYear: number,
+    public readonly searchTerm: string,
   ) {
     this.playableOn = platforms;
   }
@@ -118,6 +120,7 @@ export class HowLongToBeatParser {
     let gameplayMain = 0;
     let gameplayMainExtra = 0;
     let gameplayComplete = 0;
+    let releaseYear = 0;
 
     gameName = $('div[class*=GameHeader_profile_header__]')[0].children[0].data.trim();
     imageUrl = $('div[class*=GameHeader_game_image__]')[0].children[0].attribs.src;
@@ -178,6 +181,7 @@ export class HowLongToBeatParser {
       gameplayMainExtra,
       gameplayComplete,
       1,
+      releaseYear,
       gameName
     );
   }

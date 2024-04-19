@@ -36,7 +36,7 @@ class HowLongToBeatService {
             for (const resultEntry of search.data) {
                 hltbEntries.push(new HowLongToBeatEntry('' + resultEntry.game_id, // game id is now a number, but I want to keep the model stable
                 resultEntry.game_name, '', // no description
-                resultEntry.profile_platform ? resultEntry.profile_platform.split(', ') : [], hltbsearch_1.HltbSearch.IMAGE_URL + resultEntry.game_image, [["Main", "Main"], ["Main + Extra", "Main + Extra"], ["Completionist", "Completionist"]], Math.round(resultEntry.comp_main / 3600), Math.round(resultEntry.comp_plus / 3600), Math.round(resultEntry.comp_100 / 3600), HowLongToBeatService.calcDistancePercentage(resultEntry.game_name, query), query));
+                resultEntry.profile_platform ? resultEntry.profile_platform.split(', ') : [], hltbsearch_1.HltbSearch.IMAGE_URL + resultEntry.game_image, [["Main", "Main"], ["Main + Extra", "Main + Extra"], ["Completionist", "Completionist"]], Math.round(resultEntry.comp_main / 3600), Math.round(resultEntry.comp_plus / 3600), Math.round(resultEntry.comp_100 / 3600), HowLongToBeatService.calcDistancePercentage(resultEntry.game_name, query), resultEntry.release_world, query));
             }
             return hltbEntries;
         });
@@ -73,7 +73,7 @@ exports.HowLongToBeatService = HowLongToBeatService;
 class HowLongToBeatEntry {
     constructor(id, name, description, 
     /* replaces playableOn */
-    platforms, imageUrl, timeLabels, gameplayMain, gameplayMainExtra, gameplayCompletionist, similarity, searchTerm) {
+    platforms, imageUrl, timeLabels, gameplayMain, gameplayMainExtra, gameplayCompletionist, similarity, releaseYear, searchTerm) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -84,6 +84,7 @@ class HowLongToBeatEntry {
         this.gameplayMainExtra = gameplayMainExtra;
         this.gameplayCompletionist = gameplayCompletionist;
         this.similarity = similarity;
+        this.releaseYear = releaseYear;
         this.searchTerm = searchTerm;
         this.playableOn = platforms;
     }
@@ -108,6 +109,7 @@ class HowLongToBeatParser {
         let gameplayMain = 0;
         let gameplayMainExtra = 0;
         let gameplayComplete = 0;
+        let releaseYear = 0;
         gameName = $('div[class*=GameHeader_profile_header__]')[0].children[0].data.trim();
         imageUrl = $('div[class*=GameHeader_game_image__]')[0].children[0].attribs.src;
         let liElements = $('div[class*=GameStats_game_times__] li');
@@ -148,7 +150,7 @@ class HowLongToBeatParser {
                 timeLabels.push(['gameplayComplete', type]);
             }
         });
-        return new HowLongToBeatEntry(id, gameName, gameDescription, platforms, imageUrl, timeLabels, gameplayMain, gameplayMainExtra, gameplayComplete, 1, gameName);
+        return new HowLongToBeatEntry(id, gameName, gameDescription, platforms, imageUrl, timeLabels, gameplayMain, gameplayMainExtra, gameplayComplete, 1, releaseYear, gameName);
     }
     /**
      * Utility method used for parsing a given input text (like
