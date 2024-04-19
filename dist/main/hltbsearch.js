@@ -77,8 +77,7 @@ class HltbSearch {
             // Use built-in javascript URLSearchParams as a drop-in replacement to create axios.post required data param
             let search = Object.assign({}, this.payload);
             search.searchTerms = query;
-            if (platform)
-                search.searchOptions.games.platform = platform;
+            search.searchOptions.games.platform = platform;
             try {
                 let result = yield axios.post(HltbSearch.SEARCH_URL, search, {
                     headers: {
